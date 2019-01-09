@@ -1,0 +1,23 @@
+{
+  "name": "proiect-final",
+  "version": "1.0.0",
+  "description": "HCI",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron .",
+	"pack": "electron-packager . \"Cu barca pe valuri\" --platform=win32 --arch=ia32,x64"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/titus-pinta/HCI.git"
+  },
+  "author": "Monica Palade, Titus Pinta, Dragos Rebegea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/titus-pinta/HCI/issues"
+  },
+  "homepage": "https://github.com/titus-pinta/HCI#readme",
+  "dependencies": {
+    "electron": "^4.0.1"
+  }
+}
