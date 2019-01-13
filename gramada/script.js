@@ -56,13 +56,18 @@ function right_to_left(ev){
   let str = $(ev.target).css("right");
   console.log(str);
   if(parseInt((str).substring(0, str.length - 2)) >= width/2){
-    $(ev.target).prop("click", null).off("click");
+    $(ev.target).prop("click", left_to_right);
+	$(ev.target).click(right_to_left);
     return;
   }
 
 
   animatie_on = true;
-  play_audio("#audio_uimire" + (Math.floor(Math.random() * 4) + 1));
+  let nr_scoici_in_dreapta = $(".scoica").filter(function(index){
+        let str = $(this).css("right");
+        return parseInt((str).substring(0, str.length - 2)) >= width/2;
+      }).length + 1;
+  play_audio("#scoici" + nr_scoici_in_dreapta);
 
   let _next = 0;
   while(! sfarsit_libere[_next]) _next++;
@@ -72,10 +77,12 @@ function right_to_left(ev){
   $(ev.target).attr({"pozitie": _next});
 
   $(ev.target).animate( cordonate_sfarsit[_next], 1000, function() {
-    $(ev.target).prop("click", null).off("click");
     next_pozitie++;
     animatie_on = false;
     console.log(next_pozitie);
+	
+	$(ev.target).prop("click", left_to_right);
+	$(ev.target).click(right_to_left);
   });
 }
 
@@ -87,12 +94,18 @@ function left_to_right(ev)
   let str = $(ev.target).css("right");
   console.log(str);
   if(parseInt((str).substring(0, str.length - 2)) <= width/2){
-    $(ev.target).prop("click", null).off("click");
+    
+	$(ev.target).prop("click", right_to_left);
+	$(ev.target).click(right_to_left);
     return;
   }
 
   animatie_on = true;
-  play_audio("#audio_uimire" + (Math.floor(Math.random() * 4) + 1));
+  let nr_scoici_in_dreapta = $(".scoica").filter(function(index){
+        let str = $(this).css("right");
+        return parseInt((str).substring(0, str.length - 2)) >= width/2;
+      }).length - 1;
+  play_audio("#scoici" + nr_scoici_in_dreapta);
 
   let _next = 0;
   while(! start_libere[_next]) _next++;
@@ -102,10 +115,11 @@ function left_to_right(ev)
   $(ev.target).attr({"pozitie": _next});
 
   $(ev.target).animate( cordonate_start[_next], 1000, function() {
-  	$(ev.target).prop("click", null).off("click");
   	next_pozitie--;
   	animatie_on = false;
   	console.log(next_pozitie);
+	$(ev.target).prop("click", right_to_left);
+	$(ev.target).click(right_to_left);
 	});
 }
 
@@ -151,7 +165,15 @@ $(document).ready(function () {
 
       }else if(nr_scoici_in_dreapta == 5){
         play_audio("#audio_felicitari");
-        $("#audio_felicitari").bind("ended", function(){setTimeout(function(){ window.location = "../menu/index.html" }, 500)});
+		$("#pirat").animate({bottom: "51%", left: "65%"}, 5000, function(){
+			
+			$("#pirat").animate({bottom: "51%", left: "100%"}, 10000, function(){});
+			$("#barca").animate({bottom: "51%", left: "100%"}, 10000, function(){});
+		});
+		
+        $("#audio_felicitari").bind("ended", function(){
+				setTimeout(function(){ window.location = "../menu/index.html"; }, 1000);
+		});
 
     }
 
