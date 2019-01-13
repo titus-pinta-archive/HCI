@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "electron .",
-	"pack": "electron-packager . \"Cu barca pe valuri\" --platform=win32 --arch=ia32,x64"
+	"pack": "electron-packager . \"Cu barca pe valuri\" --platform=win32 --arch=x64"
   },
   "repository": {
     "type": "git",
